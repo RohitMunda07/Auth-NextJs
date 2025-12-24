@@ -1,0 +1,9 @@
+learn how to Catch-all params (advanced but useful)
+folder structue
+app/docs/[...slug]/page.tsx
+
+url -> /docs/react/hooks/
+params -> {
+  slug: ["react", "hooks", "useEffect"]
+}
+
