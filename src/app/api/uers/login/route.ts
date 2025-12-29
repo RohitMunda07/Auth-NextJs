@@ -36,6 +36,7 @@ export async function POST(request: NextRequest) {
         }
 
         // creating verification token
+        // console.log("TOKEN_SECRET:", process.env.TOKEN_SECRET);
         const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET!, { expiresIn: "1d" })
 
         const response = NextResponse.json(
@@ -51,7 +52,7 @@ export async function POST(request: NextRequest) {
             // secure: true,
             // sameSite: false
         })
-        
+
         return response;
 
     } catch (error: any) {
