@@ -12,7 +12,10 @@ export async function POST(request: NextRequest) {
         const reqBody = await request.json();
         const { email, password } = reqBody;
 
-        const user = await User.findOne({ email });
+        console.log("Receive ReqBody", reqBody);
+
+        const user = await User.findOne({ email })
+            .select("+password");
         if (!user) {
             return NextResponse.json(
                 { error: "User Not Found" },
@@ -20,13 +23,18 @@ export async function POST(request: NextRequest) {
             )
         }
 
+        console.log("User check");
+
         const isValidPassword = await bcryptjs.compare(password, user.password);
+
         if (!isValidPassword) {
             return NextResponse.json(
                 { error: "Invalid Password" },
                 { status: 403 }
             )
         }
+
+        console.log("Password check");
 
         // verification token
         const tokenData = {
@@ -47,11 +55,15 @@ export async function POST(request: NextRequest) {
             { status: 200 },
         )
 
+        console.log("response check");
+
         response.cookies.set("token", token, {
             httpOnly: true,
             // secure: true,
             // sameSite: false
         })
+
+        console.log("Cookie check");
 
         return response;
 

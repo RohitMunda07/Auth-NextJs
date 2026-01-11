@@ -76,7 +76,7 @@ export default function signUp() {
                     onClick={onLogin}
                     className="text-2xl bg-blue-600 rounded-lg px-2 py-1 focus:outline-none cursor-pointer"
                 >{disableButton ? "No Login" : "Login"}</button>
-                <Link href="/signUp">Go to Sign up Page</Link>
+                <Link href="/signup">Go to Sign up Page</Link>
             </div>
         </div>
     )
